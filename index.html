@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>File Downloader</title>
+    </head>
+    <body>
+        <input type="text" id="name" placeholder="Name"/>
+        <button type="button" onclick="download()">Download</button>
+    </body>
+    <script>
+        function download() {
+
+            //static content
+            var text = "Test download --> ";
+
+            //adding field value
+            text += document.getElementById("name").value;
+
+            //replacing any - with _
+            text = text.replace(/-/g,'_');
+
+            var filename = "download-result.txt"
+            var pom = document.createElement('a');
+            pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            pom.setAttribute('download', filename);
+
+            if (document.createEvent) {
+                var event = document.createEvent('MouseEvents');
+                event.initEvent('click', true, true);
+                pom.dispatchEvent(event);
+            }
+            else {
+                pom.click();
+            }
+        }
+    </script>
+</html>
